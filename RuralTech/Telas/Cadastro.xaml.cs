@@ -82,7 +82,6 @@ namespace RuralTech.Telas
                 else
                 {
                     MessageBox.Show("Campos vazios!");
-
                 }
             }
             catch

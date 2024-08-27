@@ -28,5 +28,10 @@ namespace RuralTech.Telas
         {
 
         }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            stack_barraLateral.Width = 1500;
+        }
     }
 }

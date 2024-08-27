@@ -22,7 +22,6 @@ namespace DataBase.Configuracao
             {
                 connection = new MySqlConnection($"server={_servidor};database={_bancoDadosNome};port={_porta};user={_usuario};password={_senha}");
                 connection.Open();
-                MessageBox.Show("Banco de dados ativcado");
             }
             catch (Exception e)
             {
@@ -46,5 +45,43 @@ namespace DataBase.Configuracao
             }
         }
 
+    }
+
+    static class DAOHelper
+    {
+        public static string GetString(MySqlDataReader reader, string column_name)
+        {
+            string text = string.Empty;
+
+            if (!reader.IsDBNull(reader.GetOrdinal(column_name)))
+                text = reader.GetString(column_name);
+
+            return text;
+        }
+
+        public static double GetDouble(MySqlDataReader reader, string column_name)
+        {
+            double value = 0.0;
+
+            if (!reader.IsDBNull(reader.GetOrdinal(column_name)))
+                value = reader.GetDouble(column_name);
+
+            return value;
+        }
+
+        public static DateTime? GetDateTime(MySqlDataReader reader, string column_name)
+        {
+            DateTime? value = null;
+
+            if (!reader.IsDBNull(reader.GetOrdinal(column_name)))
+                value = reader.GetDateTime(column_name);
+
+            return value;
+        }
+
+        public static bool IsNull(MySqlDataReader reader, string column_name)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(column_name));
+        }
     }
 }

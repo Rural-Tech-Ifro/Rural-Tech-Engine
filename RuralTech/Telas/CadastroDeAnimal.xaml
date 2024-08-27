@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Background="Green" Width="60" Height="500" Margin="0,82,0,43">
+        <StackPanel Background="Green" Width="60" Height="500" Margin="0,82,0,43" Name="stack_barraLateral">
             <!-- Ícones da Barra Lateral -->
             <Button Content="&#xE80F;" FontFamily="Segoe MDL2 Assets" Width="50" Height="50" Background="Transparent"/>
             <Button Content="&#xE7C4;" FontFamily="Segoe MDL2 Assets" Width="50" Height="50" Background="Transparent"/>
@@ -46,7 +46,7 @@
                 <StackPanel.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
                 </StackPanel.Effect>
-                <ToggleButton Margin="10" Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                <ToggleButton Margin="10" Style="{StaticResource MaterialDesignHamburgerToggleButton}" Checked="ToggleButton_Checked" />
                 <materialDesign:PackIcon Kind="AccountCircle" Width="40" Height="40" Margin="10" Background="White" Foreground="Green" />
 
                 <StackPanel VerticalAlignment="Center">
