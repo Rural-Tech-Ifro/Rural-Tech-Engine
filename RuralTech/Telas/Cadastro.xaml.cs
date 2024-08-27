@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataBase.Configuracao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,22 +21,61 @@ namespace RuralTech.Telas
     /// </summary>
     public partial class Cadastro : Window
     {
+       
         public Cadastro()
         {
-            InitializeComponent();
+            InitializeComponent();  
+        }
+
+        public void InserirBancoDados()
+        {
+            try
+            {
+                Conexao conexao = new Conexao();
+
+                var comando = conexao.Comando("INSERT INTO usuario (nome_usu, email_usu, senha_usu) VALUES (@nome, @email, @senha);");
+                foreach (Usuario str in Program.usuarios)
+                {
+                    comando.Parameters.AddWithValue("@nome", str.Nome.Trim());
+                    comando.Parameters.AddWithValue("@email", str.Email.Trim());
+                    comando.Parameters.AddWithValue("@senha", str.Senha.Trim());
+
+                }
+                Program.usuarios.Clear();
+                var resultado = comando.ExecuteNonQuery();
+
+                if (resultado > 0)
+                {
+                    MessageBox.Show("Usuario Cadastrado com sucesso!");
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            var usuario = txt_usuario.Text;
-            var email = txt_email.Text;
-            var senha = txt_senha.Password;
-               
-            if (usuario != "" && email != "" && senha != "")
+            try
             {
-                MessageBox.Show("Teste Cadastro: " + usuario + "\n" + email + " \n" + senha);
+                var usuario = txt_usuario.Text;
+                var email = txt_email.Text;
+                var senha = txt_senha.Password;
+                var confirmarSenha = txt_confirmarSenha.Password;
 
+                if ((usuario != "" && email != "" && senha != "") && (senha == confirmarSenha))
+                {
+                    Usuario conexao = new Usuario(usuario, email, senha);
+                    Program.usuarios.Add(conexao);
+                    InserirBancoDados();
+                }
+            }
+            catch
+            {
+            
             }
         }
 
