@@ -66,11 +66,23 @@ namespace RuralTech.Telas
                 var senha = txt_senha.Password;
                 var confirmarSenha = txt_confirmarSenha.Password;
 
-                if ((usuario != "" && email != "" && senha != "") && (senha == confirmarSenha))
+                if (usuario != "" && email != "" && senha != "")
                 {
-                    Usuario conexao = new Usuario(usuario, email, senha);
-                    Program.usuarios.Add(conexao);
-                    InserirBancoDados();
+                    if (senha == confirmarSenha)
+                    {
+                        Usuario conexao = new Usuario(usuario, email, senha);
+                        Program.usuarios.Add(conexao);
+                        InserirBancoDados();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Senhas não se coincidem!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Campos vazios!");
+
                 }
             }
             catch
